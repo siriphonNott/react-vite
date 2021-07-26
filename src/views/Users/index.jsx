@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Title, NoItem } from '@/components/common'
 import { getUsers } from '@/services/user/userService'
 import { alertSuccess, alertError } from '@/helpers/notification'
+import { motion } from 'framer-motion'
+import { toRight } from '@/helpers/pageTransition'
 
 export default function Users() {
 
@@ -47,12 +49,20 @@ export default function Users() {
   }
 
   return (
-    <div>
-      <Title title="Users" />
-      { users.length < 1 
-        ? <NoItem title="No item" />
-        : users.map(v => <UserItem key={v.id} id={v.id} name={v.name} email={v.email}  phone={v.phone} website={v.website} />)
-      }
-    </div>
+    <motion.div 
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={toRight.variants}
+      transition={toRight.transition}
+    >
+      <div>
+        <Title title="Users" />
+        { users.length < 1 
+          ? <NoItem title="No item" />
+          : users.map(v => <UserItem key={v.id} id={v.id} name={v.name} email={v.email}  phone={v.phone} website={v.website} />)
+        }
+      </div>
+    </motion.div>
   )
 }

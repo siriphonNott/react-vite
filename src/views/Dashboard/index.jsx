@@ -1,6 +1,8 @@
 import React from 'react'
 import { Title } from '@/components/common'
 import { Doughnut, Bar, PolarArea } from 'react-chartjs-2';
+import { motion } from 'framer-motion'
+import { toRight, toDown } from '@/helpers/pageTransition'
 
 const rand = () => Math.round(Math.random() * 20 - 10);
 
@@ -191,20 +193,28 @@ const cartData = {
 
 export default function Dashboard() {
   return (
-    <div>
-      <Title title="Dashboard" />
-      <div className="md:flex p-5">
-        <div className="md:w-1/2 w-full xl:p-10 sm:p-4 p-2"><Bar data={cartData.verticalbar} /></div>
-        <div className="md:w-1/2 w-full xl:p-10 sm:p-4 p-2"><Bar data={cartData.horizontalBar} options={cartData.horizontalBar.options} /></div>
+    <motion.div 
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={toDown.variants}
+      transition={toDown.transition}
+    >
+      <div>
+        <Title title="Dashboard" />
+        <div className="md:flex p-5">
+          <div className="md:w-1/2 w-full xl:p-10 sm:p-4 p-2"><Bar data={cartData.verticalbar} /></div>
+          <div className="md:w-1/2 w-full xl:p-10 sm:p-4 p-2"><Bar data={cartData.horizontalBar} options={cartData.horizontalBar.options} /></div>
+        </div>
+        <div className="md:flex p-5">
+          <div className="md:w-1/2 w-full xl:p-10 sm:p-4 p-2"><PolarArea data={cartData.polar} /></div>
+          <div className="md:w-1/2 w-full xl:p-10 sm:p-4 p-2"><Doughnut data={cartData.doughnut} /></div>
+        </div>
+        <div className="md:flex p-5">
+          <div className="md:w-1/2 w-full xl:p-10 sm:p-4 p-2"><Bar data={cartData.multiType} /></div>
+          <div className="md:w-1/2 w-full xl:p-10 sm:p-4 p-2"><Bar data={cartData.stackedBar} options={cartData.stackedBar.options} /></div>
+        </div>
       </div>
-      <div className="md:flex p-5">
-        <div className="md:w-1/2 w-full xl:p-10 sm:p-4 p-2"><PolarArea data={cartData.polar} /></div>
-        <div className="md:w-1/2 w-full xl:p-10 sm:p-4 p-2"><Doughnut data={cartData.doughnut} /></div>
-      </div>
-      <div className="md:flex p-5">
-        <div className="md:w-1/2 w-full xl:p-10 sm:p-4 p-2"><Bar data={cartData.multiType} /></div>
-        <div className="md:w-1/2 w-full xl:p-10 sm:p-4 p-2"><Bar data={cartData.stackedBar} options={cartData.stackedBar.options} /></div>
-      </div>
-    </div>
+    </motion.div>
   )
 }

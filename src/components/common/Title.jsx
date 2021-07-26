@@ -1,5 +1,5 @@
 import React from 'react'
-import { menuList } from '@/config/constants'
+import { menuList } from '@/app/constants'
 
 const Title = ({ title = '', className }) => {
   const menu = menuList.find(v => v.name.toLowerCase() === title.toLowerCase())

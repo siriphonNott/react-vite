@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from 'react'
-import { Title, NoItem } from '@/components/common'
-import { getTodos } from '@/services/todo/todoService'
+import React, { useEffect } from 'react'
+import { Title, NoItem, Loading } from '@/components/common'
 import { alertSuccess, alertWarning, alertError } from '@/helpers/notification'
+import { useSelector, useDispatch } from "react-redux";
+import { fetchTodos } from './todosSlice'
+import { motion } from 'framer-motion'
+import { fadeIn } from '@/helpers/pageTransition'
 
 export default function Todos() {
-  const [todos, setTodos] = useState([])
 
-  useEffect(() => {
-    getTodos().then((data) => {
-      setTodos(data)
-    }).catch(err => {
-      alertError(err.message)
-    })
-  }, [])
+  const { todos, isLoading, error } = useSelector(state => state.todos);
+  const dispatch = useDispatch()
+
+  // Use Effect
+  useEffect(() => dispatch(fetchTodos()), [])
+  useEffect(() => alertError(error), [error])
 
   const TodoItem = ({ id, title, completed }) => {
     const bgItem = completed ? 'bg-green-50 hover:bg-green-100' : 'bg-yellow-50 hover:bg-yellow-100'
@@ -48,14 +49,25 @@ export default function Todos() {
     setTodos(todosFiltered)
     alertSuccess('The task has been deleted.')
   }
+
+  if(isLoading) return <Loading />
  
   return (
-    <div>
-      <Title title="Todos" />
-      { todos.length < 1 
-        ? <NoItem title="No item" />
-        : todos.map(v => <TodoItem key={v.id} id={v.id} title={v.title} completed={v.completed} />)
-      }
-    </div>
+    <motion.div 
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={fadeIn.variants}
+      transition={fadeIn.transition}
+    >
+      <div>
+        <Title title="Todos" />
+        {
+          todos.length 
+            ? todos.map(v => <TodoItem key={v.id} id={v.id} title={v.title} completed={v.completed} />) 
+            : <NoItem title="No item" />
+        }
+      </div>
+    </motion.div>
   )
 }

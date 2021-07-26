@@ -1,6 +1,8 @@
 import React from 'react'
 import { Title } from '@/components/common'
 import { Switch, Route, Link, useRouteMatch, Redirect, useLocation } from 'react-router-dom'
+import { motion } from 'framer-motion'
+import { toDown } from '@/helpers/pageTransition'
 
 import {ClickEvents,
   Crazy,
@@ -24,16 +26,16 @@ const cartTypes = [
   { name: 'Crazy', linkto: '/crazy' },
   { name: 'Line', linkto: '/line' },
   { name: 'Pie', linkto: '/pie' },
+  { name: 'Radar', linkto: '/radar' },
   { name: 'Doughnut', linkto: '/doughnut' },
+  { name: 'Polar', linkto: '/polar' },
+  { name: 'Scatter', linkto: '/scatter' },
   { name: 'Dynamic', linkto: '/dynamic' },
   { name: 'GroupedBar', linkto: '/groupedbar' },
   { name: 'MultiType', linkto: '/multitype' },
-  { name: 'Polar', linkto: '/polar' },
   { name: 'HorizontalBar', linkto: '/horizontalbar' },
   { name: 'MultiAxisLine', linkto: '/multiaxisline' },
-  { name: 'Scatter', linkto: '/scatter' },
   { name: 'StackedBar', linkto: '/stackedbar' },
-  { name: 'Radar', linkto: '/radar' },
   { name: 'VerticalBar', linkto: '/verticalbar' },
 ];
 
@@ -53,29 +55,37 @@ export default function Carts() {
   }
 
   return (
-    <div>
-      <Title title="Dashboard" />
-      <div className="flex flex-wrap mb-4">
-        { cartTypes.map((v) =>  <CartItem key={v.name} name={v.name} linkto={v.linkto} />) }
+    <motion.div 
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={toDown.variants}
+      transition={toDown.transition}
+    >
+      <div>
+        <Title title="Dashboard" />
+        <div className="flex flex-wrap mb-4">
+          { cartTypes.map((v) =>  <CartItem key={v.name} name={v.name} linkto={v.linkto} />) }
+        </div>
+        <Switch>
+          <Route path={`${path}/clickevents`} component={ClickEvents} />
+          <Route path={`${path}/crazy`} component={Crazy} />
+          <Route path={`${path}/doughnut`} component={Doughnut} />
+          <Route path={`${path}/dynamic`} component={Dynamic} />
+          <Route path={`${path}/groupedbar`} component={GroupedBar} />
+          <Route path={`${path}/horizontalbar`} component={HorizontalBar} />
+          <Route path={`${path}/line`} component={Line} />
+          <Route path={`${path}/multiaxisline`} component={MultiAxisLine} />
+          <Route path={`${path}/multitype`} component={MultiType} />
+          <Route path={`${path}/pie`} component={Pie} />
+          <Route path={`${path}/polar`} component={Polar} />
+          <Route path={`${path}/radar`} component={Radar} />
+          <Route path={`${path}/scatter`} component={Scatter} />
+          <Route path={`${path}/stackedbar`} component={StackedBar} />
+          <Route path={`${path}/verticalbar`} component={VerticalBar} />
+          <Route path="*"><Redirect to={path} /> </Route>  
+        </Switch>
       </div>
-      <Switch>
-        <Route path={`${path}/clickevents`} component={ClickEvents} />
-        <Route path={`${path}/crazy`} component={Crazy} />
-        <Route path={`${path}/doughnut`} component={Doughnut} />
-        <Route path={`${path}/dynamic`} component={Dynamic} />
-        <Route path={`${path}/groupedbar`} component={GroupedBar} />
-        <Route path={`${path}/horizontalbar`} component={HorizontalBar} />
-        <Route path={`${path}/line`} component={Line} />
-        <Route path={`${path}/multiaxisline`} component={MultiAxisLine} />
-        <Route path={`${path}/multitype`} component={MultiType} />
-        <Route path={`${path}/pie`} component={Pie} />
-        <Route path={`${path}/polar`} component={Polar} />
-        <Route path={`${path}/radar`} component={Radar} />
-        <Route path={`${path}/scatter`} component={Scatter} />
-        <Route path={`${path}/stackedbar`} component={StackedBar} />
-        <Route path={`${path}/verticalbar`} component={VerticalBar} />
-        <Route path="*"><Redirect to={path} /> </Route>  
-      </Switch>
-    </div>
+    </motion.div>
   )
 }

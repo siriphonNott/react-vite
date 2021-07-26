@@ -8,12 +8,15 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.6.1",
     "axios": "^0.21.1",
     "chart.js": "^3.5.0",
     "express": "^4.17.1",
+    "framer-motion": "^4.1.17",
     "react": "^17.0.0",
     "react-chartjs-2": "^3.0.4",
     "react-dom": "^17.0.0",
+    "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
     "react-toastify": "^7.0.4",
     "serve-static": "^1.14.1"
