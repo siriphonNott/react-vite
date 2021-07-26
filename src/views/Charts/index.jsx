@@ -21,7 +21,7 @@ import {ClickEvents,
   VerticalBar
 } from './types'
 
-const cartTypes = [
+const chartTypes = [
   { name: 'ClickEvents', linkto: '/clickevents' },
   { name: 'Crazy', linkto: '/crazy' },
   { name: 'Line', linkto: '/line' },
@@ -39,11 +39,11 @@ const cartTypes = [
   { name: 'VerticalBar', linkto: '/verticalbar' },
 ];
 
-export default function Carts() {
+export default function Charts() {
   const { url, path } = useRouteMatch()
   const { pathname } = useLocation()
 
-  const CartItem = ({ name, linkto }) => {
+  const ChartItem = ({ name, linkto }) => {
     const active = pathname.includes(linkto) ? 'bg-blue-100 font-semibold' : 'bg-blue-50'
     return (
       <Link to={ url + linkto }>
@@ -63,9 +63,9 @@ export default function Carts() {
       transition={toDown.transition}
     >
       <div>
-        <Title title="Dashboard" />
+        <Title title="Charts" />
         <div className="flex flex-wrap mb-4">
-          { cartTypes.map((v) =>  <CartItem key={v.name} name={v.name} linkto={v.linkto} />) }
+          { chartTypes.map((v) =>  <ChartItem key={v.name} name={v.name} linkto={v.linkto} />) }
         </div>
         <Switch>
           <Route path={`${path}/clickevents`} component={ClickEvents} />

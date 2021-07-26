@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { getTodos } from '@/services/todo/todoService'
+import { current } from 'immer'
 
 const initialState = {  todos: [], isLoading: true, value: '', error: null }
 
@@ -19,11 +20,17 @@ export const todosSlice = createSlice({
   name: 'todos',
   initialState,
   reducers: {
-    increment: (state) => {      
-      state.value += 1    
+    updateToto: (state, action) => { 
+      // Extracting the current state from a draft
+      try {
+        const todos_ = current(state.todos)
+        const index = todos_.findIndex(v => v.id === action.payload.id)
+        state.todos[index].completed = !state.todos[index].completed
+      } catch (error) {
+      }
     },    
-    decrement: (state) => { 
-      state.value -= 1    
+    removeTodo: (state, action) => { 
+      state.todos = state.todos.filter(v => v.id !== action.payload.id)
     },
   },
   extraReducers: (builder) => {
@@ -43,7 +50,7 @@ export const todosSlice = createSlice({
   })
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount } = todosSlice.actions
+export const { updateToto, removeTodo } = todosSlice.actions
 export default todosSlice.reducer
 
 // Selectors

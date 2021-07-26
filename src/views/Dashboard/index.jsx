@@ -6,7 +6,7 @@ import { toRight, toDown } from '@/helpers/pageTransition'
 
 const rand = () => Math.round(Math.random() * 20 - 10);
 
-const cartData = {
+const chartData = {
   doughnut: {
     labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
     datasets: [
@@ -203,16 +203,16 @@ export default function Dashboard() {
       <div>
         <Title title="Dashboard" />
         <div className="md:flex p-5">
-          <div className="md:w-1/2 w-full xl:p-10 sm:p-4 p-2"><Bar data={cartData.verticalbar} /></div>
-          <div className="md:w-1/2 w-full xl:p-10 sm:p-4 p-2"><Bar data={cartData.horizontalBar} options={cartData.horizontalBar.options} /></div>
+          <div className="md:w-1/2 w-full xl:p-10 sm:p-4 p-2"><Bar data={chartData.verticalbar} /></div>
+          <div className="md:w-1/2 w-full xl:p-10 sm:p-4 p-2"><Bar data={chartData.horizontalBar} options={chartData.horizontalBar.options} /></div>
         </div>
         <div className="md:flex p-5">
-          <div className="md:w-1/2 w-full xl:p-10 sm:p-4 p-2"><PolarArea data={cartData.polar} /></div>
-          <div className="md:w-1/2 w-full xl:p-10 sm:p-4 p-2"><Doughnut data={cartData.doughnut} /></div>
+          <div className="md:w-1/2 w-full xl:p-10 sm:p-4 p-2"><PolarArea data={chartData.polar} /></div>
+          <div className="md:w-1/2 w-full xl:p-10 sm:p-4 p-2"><Doughnut data={chartData.doughnut} /></div>
         </div>
         <div className="md:flex p-5">
-          <div className="md:w-1/2 w-full xl:p-10 sm:p-4 p-2"><Bar data={cartData.multiType} /></div>
-          <div className="md:w-1/2 w-full xl:p-10 sm:p-4 p-2"><Bar data={cartData.stackedBar} options={cartData.stackedBar.options} /></div>
+          <div className="md:w-1/2 w-full xl:p-10 sm:p-4 p-2"><Bar data={chartData.multiType} /></div>
+          <div className="md:w-1/2 w-full xl:p-10 sm:p-4 p-2"><Bar data={chartData.stackedBar} options={chartData.stackedBar.options} /></div>
         </div>
       </div>
     </motion.div>

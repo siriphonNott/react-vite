@@ -1,7 +1,7 @@
 import React from 'react'
 import { Header, Footer, Sidebar, SidebarMB } from '@/layouts/'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { Dashboard, Todos, Users, Carts, PageNotFound } from '@/views'
+import { Dashboard, Todos, Users, Charts, PageNotFound } from '@/views'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AnimatePresence } from 'framer-motion'
@@ -19,7 +19,7 @@ function App() {
                 <Route exact path="/" component={Dashboard} />
                 <Route exact path="/todos" component={Todos} />  
                 <Route exact path="/users" component={Users} />  
-                <Route path="/carts" component={Carts} />  
+                <Route path="/charts" component={Charts} />  
                 <Route path="*" component={PageNotFound} />  
               </Switch>
             </AnimatePresence>
