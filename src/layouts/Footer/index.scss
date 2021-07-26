@@ -1,0 +1,11 @@
+.layout-footer {
+  position: fixed;
+  bottom: 0;
+  @apply bg-gray-900;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: whitesmoke;
+  height: 30px;
+}
