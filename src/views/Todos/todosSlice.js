@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { getTodos } from '@/services/Todo/todoService'
+import { getTodos } from '@/services/todo/todoService'
 
 const initialState = {  todos: [], isLoading: true, value: '', error: null }
 
